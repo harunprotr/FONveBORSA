@@ -34,14 +34,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Fon ve BIST analizini çalıştır
-        run: |
-          python -c "
-          print('FONveBORSA otomatik analiz başladı')
-          print('TEFAS kontrolü')
-          print('BIST kontrolü')
-          print('Trend kontrolü')
-          print('Para akışı kontrolü')
-          print('Haber kontrolü')
-          print('Analiz tamamlandı')
-          "
+      - name: FONveBORSA analizini çalıştır
+  run: |
+    python analysis/run_analysis.py
