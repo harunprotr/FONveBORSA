@@ -23,5 +23,5 @@ jobs:
       - name: Gereksinimleri kur
         run: pip install -r requirements.txt
 
-      - name: Otomatik analizi çalıştır
+      - name: Fon ve BIST analizini çalıştır
         run: python analysis/run_analysis.py
