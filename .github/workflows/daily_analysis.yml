@@ -2,26 +2,17 @@ name: FONveBORSA Otomatik Analiz
 
 on:
   schedule:
-    # Türkiye saati 10:30
-    # UTC = Türkiye - 3 saat
     - cron: "30 7 * * 1-5"
-
-    # Türkiye saati 13:00
     - cron: "0 10 * * 1-5"
-
-    # Türkiye saati 18:00
     - cron: "0 15 * * 1-5"
-
   workflow_dispatch:
 
 jobs:
-  market-analysis:
-
+  analyze:
     runs-on: ubuntu-latest
 
     steps:
-
-      - name: Repository indir
+      - name: Repository'yi indir
         uses: actions/checkout@v4
 
       - name: Python kur
@@ -29,11 +20,8 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Paketleri yükle
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+      - name: Gereksinimleri kur
+        run: pip install -r requirements.txt
 
-      - name: FONveBORSA analizini çalıştır
-  run: |
-    python analysis/run_analysis.py
+      - name: Otomatik analizi çalıştır
+        run: python analysis/run_analysis.py
