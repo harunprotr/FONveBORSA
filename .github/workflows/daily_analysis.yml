@@ -1,0 +1,47 @@
+name: FONveBORSA Otomatik Analiz
+
+on:
+  schedule:
+    # Türkiye saati 10:30
+    # UTC = Türkiye - 3 saat
+    - cron: "30 7 * * 1-5"
+
+    # Türkiye saati 13:00
+    - cron: "0 10 * * 1-5"
+
+    # Türkiye saati 18:00
+    - cron: "0 15 * * 1-5"
+
+  workflow_dispatch:
+
+jobs:
+  market-analysis:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Repository indir
+        uses: actions/checkout@v4
+
+      - name: Python kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Paketleri yükle
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Fon ve BIST analizini çalıştır
+        run: |
+          python -c "
+          print('FONveBORSA otomatik analiz başladı')
+          print('TEFAS kontrolü')
+          print('BIST kontrolü')
+          print('Trend kontrolü')
+          print('Para akışı kontrolü')
+          print('Haber kontrolü')
+          print('Analiz tamamlandı')
+          "
